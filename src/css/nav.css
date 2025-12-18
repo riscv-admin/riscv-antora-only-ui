@@ -493,15 +493,19 @@ body.nav-sm .nav-panel-menu {
   content: none;
 }
 
-/* Default = light mode */
-#riscvlogo {
-  content: url("../img/risc-v_logo.svg");
+/* Header logos: show only the appropriate variant */
+.riscvlogo {
+  height: 45px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-/* Dark mode (your theme toggles html.dark-theme) */
-html.dark-theme #riscvlogo {
-  content: url("../img/risc-v_logo_white.svg");
-}
+.riscvlogo--light { display: inline-block; }
+.riscvlogo--dark { display: none; }
+
+html.dark-theme .riscvlogo--light { display: none; }
+html.dark-theme .riscvlogo--dark { display: inline-block; }
 
 html.dark-theme .navbar-link:hover,
 html.dark-theme .navbar-link:focus {

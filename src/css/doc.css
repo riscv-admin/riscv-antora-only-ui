@@ -451,7 +451,7 @@
 .doc .videoblock {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .doc .imageblock.text-left,
@@ -1078,11 +1078,48 @@
   text-align: center;
 }
 
-.doc img.center,
-.doc #riscvlogo {
+.doc img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Add space below images when needed */
+.doc img.space-below,
+.doc .imageblock.space-below {
+  margin-bottom: 4rem;
+}
+
+/* Add space above images when needed */
+.doc img.space-above,
+.doc .imageblock.space-above {
+  margin-top: 4rem;
+}
+
+/* Ensure title pages are left-aligned */
+.doc > h1#page-title {
+  text-align: left;
+}
+
+/* Auto space when an image directly follows the page title */
+.doc > h1#page-title + .imageblock {
+  margin-top: 4rem;
+  align-items: flex-start;
+}
+
+/* Auto space and left-align when an image follows a top-level section heading */
+.doc h2 + .imageblock {
+  margin-top: 4rem;
+  align-items: flex-start;
+}
+
+/* If a RISC-V logo is used inside article content, keep it left-aligned */
+.doc #riscvlogo,
+.doc .riscvlogo {
+  display: inline-block;
+  margin: 0;
   max-width: 100%;
   height: auto;
 }

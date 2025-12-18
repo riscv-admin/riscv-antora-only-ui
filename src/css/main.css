@@ -47,7 +47,13 @@
   margin: 0 auto;
 }
 
-#riscvlogo,
+/* Shared sizing for logos */
+.riscvlogo {
+  height: 45px;
+  width: auto;
+  max-width: 250px;
+}
+
 #riscvlogo-foot {
   height: 45px;
   max-width: 250px;
