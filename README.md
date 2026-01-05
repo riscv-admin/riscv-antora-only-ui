@@ -1,6 +1,8 @@
 # RISC-V Antora UI
 
-This project generates and packages the static resources that RISC-V uses for the [RISC-V Docs resource site](https://docs.riscv.org/). This GitHub repository contains the UI pieces for production. For development UI, see https://github.com/riscv-admin/riscv-antora-only-ui-dev.
+This project generates and packages the static resources that RISC-V uses for the [RISC-V Docs resource site](https://docs.riscv.org/). 
+
+This GitHub repository contains the UI pieces for production. For development UI, see [RISC-V Antora UI Development](https://github.com/riscv-admin/riscv-antora-only-ui-dev).
 
 The UI is used for RISC-V documentation: https://docs.riscv.org/
 
@@ -71,7 +73,7 @@ The UI bundle will again be available at `build/ui-bundle.zip`.
 
 ## Extensions to the UI
 
-You can find additional changes in the supplemental files section of the [antora-playbook.yml](https://github.com/riscv-admin/antora-dev.riscv.org/blob/main/antora/antora-playbook.yml).
+You can find additional changes in the supplemental files section of the [antora-playbook.yml](https://github.com/riscv-admin/antora.riscv.org/tree/main/antora/supplimental-ui).
 
 ## Authors
 
