@@ -447,10 +447,25 @@
   color: var(--warning-on-color);
 }
 
+.doc > h1#page-title {
+  text-align: left;
+}
+
+.doc #riscvlogo,
+.doc .riscvlogo {
+  display: inline-block;
+  margin: 0;
+}
+
 .doc .imageblock,
 .doc .videoblock {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+}
+
+.doc .imageblock.text-center,
+.doc .videoblock.text-center {
   align-items: center;
 }
 

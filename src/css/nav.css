@@ -148,6 +148,29 @@ html.is-clipped--nav {
   transform: rotate(0deg);
 }
 
+.riscvlogo {
+  height: 45px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.riscvlogo--light {
+  display: inline-block;
+}
+
+.riscvlogo--dark {
+  display: none;
+}
+
+html.dark-theme .riscvlogo--light {
+  display: none;
+}
+
+html.dark-theme .riscvlogo--dark {
+  display: inline-block;
+}
+
 .dark-theme .nav-item.is-current-page > .nav-item-toggle {
   background: transparent url(../img/chevron.svg) no-repeat center / 50%;
 }
