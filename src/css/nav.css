@@ -447,8 +447,14 @@ html.dark-theme button.browse-version:hover {
     z-index: 800;
   }
 
-  body.nav-sm .nav-collapse,
   body.nav-sm .nav-menu {
+    margin-right: 0;
+    padding-right: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  body.nav-sm .nav-collapse {
     margin-right: 0;
     padding-right: 0;
   }
@@ -473,7 +479,7 @@ html.dark-theme button.browse-version:hover {
 }
 
 body.nav-sm .nav-panel-menu {
-  overflow: visible;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 769px) {
