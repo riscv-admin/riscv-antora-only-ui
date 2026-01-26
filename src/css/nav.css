@@ -306,12 +306,13 @@ html.dark-theme .riscvlogo--dark {
 
 .nav-panel-menu .context {
   padding: 0.8rem 1rem;
-  padding-bottom: 0;
+  padding-bottom: 0.8rem;
   margin-bottom: 0.5rem;
   position: sticky;
   top: 0;
   background-color: var(--body-background-color);
   z-index: 99;
+  border-bottom: 4px solid #fdb515;
 }
 
 .nav-panel-menu .context .title {
