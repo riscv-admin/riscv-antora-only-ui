@@ -99,8 +99,8 @@
           </a>
         {{/if}}
       {{/if}}
-      {{#with (or (lookup page.attributes (concat "wiki_url_" page.module)) page.attributes.wiki_url)}}
-        <a href="{{this}}" target="_blank" title="Details">
+      {{#if page.attributes.wiki_url}}
+        <a href="{{page.attributes.wiki_url}}" target="_blank" title="Details">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24"
@@ -111,7 +111,7 @@
             ></path></svg>
           Details
         </a>
-      {{/with}}
+      {{/if}}
     </div>
   </div>
 </aside>
