@@ -61,6 +61,20 @@
         </a>
       {{/if}}
 
+      {{#if (eq page.module "unpriv")}}
+        {{#if page.attributes.pdf_url_unpriv}}
+          <a href="{{page.attributes.pdf_url_unpriv}}" target="_blank" rel="noopener noreferrer" class="sidebar-link" download>
+            <span>Download PDF</span>
+          </a>
+        {{/if}}
+      {{else if (eq page.module "priv")}}
+        {{#if page.attributes.pdf_url_priv}}
+          <a href="{{page.attributes.pdf_url_priv}}" target="_blank" rel="noopener noreferrer" class="sidebar-link" download>
+            <span>Download PDF</span>
+          </a>
+        {{/if}}
+      {{else}}
+
       {{#if page.attributes.multiple_pdfs}}
         <div class="dropdown-toc">
           <a id="pdfDropdownButton" aria-haspopup="true" aria-expanded="false" class="sidebar-link" download>
@@ -120,6 +134,7 @@
             </svg>
           </a>
         {{/if}}
+      {{/if}}
       {{/if}}
     </div>
   </div>
