@@ -8,6 +8,77 @@
   visibility: hidden;
 }
 
+/* Version selector styles */
+.nav-trees {
+  margin-bottom: 1rem;
+}
+
+.version-box {
+  margin: 0;
+  float: right;
+  display: inline-block;
+  margin-top: 0.3rem;
+  position: relative;
+  z-index: 200;
+  right: -0.75rem;
+}
+
+.version-box span {
+  color: var(--nav-text-color, #666);
+  padding-left: 1.2rem;
+  padding-top: -0.1rem;
+  font-size: 0.75rem;
+}
+
+.version-box .single-version:hover {
+  border-color: var(--link-color, white);
+  color: var(--link-color, white);
+}
+
+.version-box .single-version {
+  background-color: var(--nav-background, white);
+  border-color: var(--nav-background, white);
+  color: var(--link-color, white);
+}
+
+.select-version {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--nav-text-color, #666);
+  padding: 0.1rem;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid var(--nav-text-color, #666);
+  border-radius: 0.5rem;
+  -moz-appearance: none;
+  background-color: var(--nav-background, #fff);
+  position: relative;
+  z-index: 201;
+}
+
+.select-version::-ms-expand {
+  display: none;
+}
+
+.select-version:hover {
+  border-color: var(--link-color, #0066cc);
+  color: var(--link-color, #0066cc);
+}
+
+.select-version:focus {
+  color: var(--link-color, #0066cc);
+  border-color: var(--link-color, #0066cc);
+  outline: none;
+}
+
+.select-version option {
+  font-weight: normal;
+}
+
+.clear {
+  clear: both;
+}
+
 .nav-container.is-active {
   visibility: visible;
 }
@@ -148,6 +219,29 @@ html.is-clipped--nav {
   transform: rotate(0deg);
 }
 
+.riscvlogo {
+  height: 45px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.riscvlogo--light {
+  display: inline-block;
+}
+
+.riscvlogo--dark {
+  display: none;
+}
+
+html.dark-theme .riscvlogo--light {
+  display: none;
+}
+
+html.dark-theme .riscvlogo--dark {
+  display: inline-block;
+}
+
 .dark-theme .nav-item.is-current-page > .nav-item-toggle {
   background: transparent url(../img/chevron.svg) no-repeat center / 50%;
 }
@@ -162,11 +256,12 @@ html.is-clipped--nav {
 
 .nav-link,
 .nav-text {
-  display: block;
+  display: inline-block;
   padding: 0.4rem 0.5rem;
   border-radius: 3px;
   padding-left: 12px;
   margin-left: 10px;
+  max-width: 100%;
 }
 
 .nav-item-toggle + .nav-link,
@@ -217,12 +312,13 @@ html.is-clipped--nav {
 
 .nav-panel-menu .context {
   padding: 0.8rem 1rem;
-  padding-bottom: 0;
+  padding-bottom: 0.8rem;
   margin-bottom: 0.5rem;
   position: sticky;
   top: 0;
   background-color: var(--body-background-color);
   z-index: 99;
+  border-bottom: 4px solid #fdb515;
 }
 
 .nav-panel-menu .context .title {
@@ -235,6 +331,17 @@ html.is-clipped--nav {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.nav-menu > .version-box ~ .nav-list > .nav-item:first-child > .nav-link,
+.nav-menu > .version-box ~ .nav-list > .nav-item:first-child > .nav-text,
+.nav-menu > .nav-trees > .version-box ~ .nav-version-group > .nav-list > .nav-item:first-child > .nav-link,
+.nav-menu > .nav-trees > .version-box ~ .nav-version-group > .nav-list > .nav-item:first-child > .nav-text {
+  display: flow-root;
+  min-height: 2.25rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding-right: 0.25rem;
 }
 
 button.browse-version {
@@ -292,11 +399,6 @@ html.dark-theme button.browse-version:hover {
   font-weight: bold;
   color: var(--color-gray-10);
   margin: 0 0.8rem;
-}
-
-.navbar-brand .page-versions {
-  display: inline-block;
-  margin-left: -0.5rem;
 }
 
 .nav-menu .search {
@@ -363,8 +465,14 @@ html.dark-theme button.browse-version:hover {
     z-index: 800;
   }
 
-  body.nav-sm .nav-collapse,
   body.nav-sm .nav-menu {
+    margin-right: 0;
+    padding-right: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  body.nav-sm .nav-collapse {
     margin-right: 0;
     padding-right: 0;
   }
@@ -382,49 +490,6 @@ html.dark-theme button.browse-version:hover {
     margin-top: 0;
   }
 
-  body.nav-sm button.browse-version {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin: 0;
-    margin-left: -5px;
-    margin-bottom: 8px;
-  }
-
-  body.nav-sm .nav-panel-menu .context {
-    margin: 0;
-    position: relative;
-  }
-
-  body.nav-sm .nav-panel-menu .context .title,
-  body.nav-sm .nav-panel-menu .context .version,
-  body.nav-sm .nav-resize,
-  body.nav-sm .DocSearch-Button span {
-    display: none;
-  }
-
-  body.nav-sm .header .navbar {
-    z-index: 900;
-  }
-
-  html.is-clipped--nav body.nav-sm .nav-menu > .nav-list {
-    display: block;
-    padding-left: 10px;
-  }
-  body.nav-sm .nav-menu > .nav-list {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 61px;
-    padding: 0.5rem 1rem;
-    width: 300px;
-    bottom: -36px;
-    background: var(--body-background-color);
-    border-right: 1px solid var(--nav-panel-divider-color);
-    z-index: 800;
-    overflow: auto;
-  }
-
   body.nav-sm .toggle-sm button.nav-toggle {
     display: block;
     margin-left: 10px;
@@ -432,7 +497,7 @@ html.dark-theme button.browse-version:hover {
 }
 
 body.nav-sm .nav-panel-menu {
-  overflow: visible;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 769px) {

@@ -141,3 +141,263 @@
 [aria-expanded="false"] .chevron {
   transform: rotate(180deg);
 }
+/*
+Any ID starting with 'norm:' is a snippet of specification text
+that has been specifically tagged to allow referencing it robustly,
+for use cases such as:
+* Linking coverage, tests plans, tests, assertions etc. to parts of
+  the spec that they cover.
+* Detecting when parts of the spec change. You can extract these
+  snippets via Asciidoc's docbook output and parsing the XML.
+* Linking documentation (e.g. the implementation defined parameter list)
+  to the spec.
+This adds a toggle button to enable highlighting of the tagged text
+and viewing their tags as tooltips.
+*/
+.tag-highlight-enabled [id^="norm:"] {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+    cursor: pointer;
+}
+
+/* Highlight tags when hovered. */
+.tag-highlight-enabled [id^="norm:"]:hover {
+    text-shadow: 0px 0px 10px green;
+}
+
+/* Highlight tags when directly linked to, irrepsective of the highlight toggle. */
+[id^="norm:"]:target {
+    text-shadow: 0px 0px 10px yellow;
+}
+
+/* Tag tooltip on hover. */
+.tag-highlight-enabled [id^="norm:"]:hover::before {
+    content: attr(id);
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1000;
+    pointer-events: none;
+    margin-top: -2em;
+}
+
+/* Toggle Button Styles */
+.tag-toggle-container {
+  margin: 8px 0;
+}
+
+.tag-toggle-container .tag-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--body-font-dark-color);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tag-toggle-container .tag-toggle-btn:hover {
+  color: var(--link-font-color);
+  text-decoration: none;
+}
+
+.tag-toggle-container .tag-toggle-btn:focus {
+  outline: none;
+}
+
+.tag-toggle-switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 12px;
+    flex-shrink: 0;
+    order: -1;
+    transition: background 0.1s ease;
+}
+
+.tag-toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.1s ease;
+}
+
+/* When highlighting is enabled */
+.tag-highlight-enabled .tag-toggle-switch {
+    background: #4CAF50;
+}
+
+.tag-highlight-enabled .tag-toggle-switch::after {
+    transform: translateX(20px);
+}
+
+/* ========== Merged from spring-toc.css ========== */
+
+body.toc-left #doc {
+  border-left: 1px solid var(--layout-border-color);
+  overflow: auto;
+  margin-left: var(--toc-width);
+}
+
+#toc {
+  display: var(--toc-display);
+  position: absolute;
+  top: var(--layout-banner-height);
+  width: var(--toc-width);
+  margin-left: calc(var(--toc-width) * -1);
+  border-right: 1px solid var(--layout-border-color);
+  padding: 1.7rem 1rem 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+#toctitle {
+  display: none;
+}
+
+#toc ul,
+#toc ol {
+  padding: 0;
+}
+
+#toc ul ul,
+#toc ul ol {
+  padding-left: 0.8rem;
+}
+
+#toc li {
+  display: block;
+  list-style: none;
+}
+
+#toc a {
+  display: block;
+  text-decoration: none;
+  color: var(--toc-font-color);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
+#toc a:hover {
+  background-color: var(--toc-hover-background-color);
+}
+
+body.fixed-toc #toc {
+  position: fixed;
+  top: 0;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+#toc li.active > a {
+  background-color: var(--toc-active-background-color);
+  color: var(--toc-active-font-color);
+}
+
+#toc > ul ul,
+#toc > ol ol {
+  display: none;
+}
+
+#toc li.active > ul,
+#toc li.active > ol,
+#toc ul.expanded,
+#toc ol.expanded {
+  display: block;
+}
+
+#back-to-index {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+#back-to-index a {
+  padding-left: 1.6rem;
+  margin-bottom: 0.6rem;
+  margin-top: -0.9rem;
+}
+
+#back-to-index a::before {
+  content: "";
+  filter: var(--toc-back-to-index-filter);
+  background: no-repeat center / 16px 16px;
+  background-image: url("../img/octicons-16.svg#view-chevron-left");
+  display: block;
+  position: absolute;
+  min-width: 16px;
+  min-height: 16px;
+  left: 1.4rem;
+}
+
+#tocbar-container {
+  display: var(--toc-bar-display);
+  width: 100%;
+  height: var(--tocbar-height);
+  background-color: var(--body-background-color);
+  border-bottom: 1px solid var(--panel-border-color);
+  z-index: 10000;
+}
+
+#tocbar {
+  width: 100%;
+  height: 100%;
+  padding-left: 6px;
+}
+
+body.fixed-toc #tocbar-container {
+  position: fixed;
+  top: 0;
+}
+
+button#toggle-toc {
+  width: var(--toc-bar-height);
+  height: var(--toc-bar-height);
+  filter: var(--toc-bar-button-filter);
+  background: no-repeat center / 16px 16px;
+  background-image: url("../img/octicons-16.svg#view-three-bars");
+  border: none;
+  outline: none;
+  padding: 0;
+  display: block;
+}
+
+body.show-toc button#toggle-toc {
+  background-image: url("../img/octicons-16.svg#view-x");
+}
+
+@media screen and (max-width: 800px) {
+  body.fixed-toc #toc {
+    top: var(--toc-bar-height);
+  }
+
+  #toc {
+    top: calc(var(--layout-banner-height) + var(--toc-bar-height));
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-color: var(--body-background-color);
+    z-index: 10000;
+  }
+
+  body.show-toc #toc {
+    display: block;
+  }
+}

@@ -87,5 +87,3 @@ Use of this software is granted under the terms of the [Mozilla Public License V
 See [LICENSE](https://github.com/spring-io/antora-ui-spring/blob/feat/gh-226/LICENSE) to find the full license text.
 
 ## Thanks
-
-This project is based on [Antora](https://antora.org). Many pieces were borrowed from Spring.IO: https://github.com/spring-io/antora-ui-spring

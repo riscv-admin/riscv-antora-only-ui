@@ -7,7 +7,22 @@
   var navContainer = document.querySelector('.nav-container')
   var navToggle1 = document.querySelector('#nav-toggle-1')
   var navToggle2 = document.querySelector('#nav-toggle-2')
-  var isNavOpen = window.localStorage && window.localStorage.getItem('sidebar') === 'open'
+  
+  // Detect home page: check data attribute first, then check URL
+  var isHomePage = (navContainer && navContainer.getAttribute('data-is-home') === 'true') ||
+                   (navContainer && navContainer.getAttribute('data-component') === 'home') ||
+                   window.location.pathname.includes('/home/') ||
+                   window.location.pathname === '/'
+  
+  var sidebarPref = window.localStorage && window.localStorage.getItem('sidebar')
+  var isNavOpen = isHomePage ? false : (sidebarPref === 'open' || sidebarPref !== 'close')
+
+  // Always start collapsed on home page
+  if (isHomePage) {
+    document.body.classList.add('nav-sm')
+    isNavOpen = false
+  }
+  
   if (navToggle1) {
     navToggle1.addEventListener('click', showNav)
   }
@@ -40,6 +55,25 @@
     })
   }
 
+  // Auto-expand nav when navigating away from home page
+  if (isHomePage) {
+    find(menuPanel, '.nav-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var href = this.getAttribute('href')
+        // Only expand if clicking a link that navigates away from home
+        if (href && !href.includes('home')) {
+          if (document.body.classList.contains('nav-sm')) {
+            document.body.classList.remove('nav-sm')
+            if (window.localStorage) {
+              window.localStorage.setItem('sidebar', 'open')
+            }
+            isNavOpen = true
+          }
+        }
+      })
+    })
+  }
+
   find(menuPanel, '.nav-item-toggle').forEach(function (btn) {
     var li = btn.parentElement
     btn.addEventListener('click', toggleActive.bind(li))
@@ -60,21 +94,38 @@
     })
   }
 
-  document.querySelector('#browse-version').addEventListener('click', function () {
-    MicroModal.show('modal-versions', {
-      disableScroll: true,
+  var navCollapseToggle = document.querySelector('#nav-collapse-toggle')
+  if (navCollapseToggle) {
+    navCollapseToggle.addEventListener('click', function () {
+      if (isNavOpen) {
+        document.body.classList.add('nav-sm')
+      } else {
+        document.body.classList.remove('nav-sm')
+      }
+      window.localStorage && window.localStorage.setItem('sidebar', !isNavOpen ? 'open' : 'close')
+      isNavOpen = !isNavOpen
     })
-  })
+  }
 
-  document.querySelector('#nav-collapse-toggle').addEventListener('click', function () {
-    if (isNavOpen) {
-      document.body.classList.add('nav-sm')
-    } else {
-      document.body.classList.remove('nav-sm')
-    }
-    window.localStorage && window.localStorage.setItem('sidebar', !isNavOpen ? 'open' : 'close')
-    isNavOpen = !isNavOpen
-  })
+  // Version selector: navigate to selected version
+  var versionSelects = document.querySelectorAll('.select-version')
+  for (var i = 0; i < versionSelects.length; i++) {
+    var select = versionSelects[i]
+    select.addEventListener('change', function () {
+      var option = this.options[this.selectedIndex]
+      var targetUrl = option.value
+      console.log('Version selector changed:', {
+        selectedVersion: option.dataset.version,
+        targetUrl: targetUrl,
+        displayVersion: option.textContent
+      })
+      if (targetUrl) {
+        // Use the relative URL provided by Antora
+        console.log('Navigating to:', targetUrl)
+        window.location.href = targetUrl
+      }
+    })
+  }
 
   function onHashChange () {
     var navLink
@@ -192,16 +243,19 @@
     document.documentElement.style.setProperty('--nav-width', `${width}px`)
     window.localStorage && window.localStorage.setItem('nav-width', `${width}`)
   }
-  document.querySelector('.nav-resize').addEventListener('mousedown', (event) => {
-    document.addEventListener('mousemove', resize, false)
-    document.addEventListener(
-      'mouseup',
-      () => {
-        document.removeEventListener('mousemove', resize, false)
-      },
-      false
-    )
-  })
+  var navResize = document.querySelector('.nav-resize')
+  if (navResize) {
+    navResize.addEventListener('mousedown', (event) => {
+      document.addEventListener('mousemove', resize, false)
+      document.addEventListener(
+        'mouseup',
+        () => {
+          document.removeEventListener('mousemove', resize, false)
+        },
+        false
+      )
+    })
+  }
   function resize (e) {
     let value = Math.max(250, e.x)
     value = Math.min(600, value)
