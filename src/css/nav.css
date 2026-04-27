@@ -1,3 +1,55 @@
+/* Bold only the top-level RISC-V Specifications link */
+.nav-menu > .nav-list > .nav-item:first-child > .nav-link {
+  font-weight: bold;
+}
+/* Unify hover shading for context title and nav links */
+.context {
+  width: 100%;
+  overflow: visible;
+}
+.context .title {
+  display: inline-block;
+  padding: 0.4rem 0.75rem 0.4rem 1.25rem;
+  max-width: 100%;
+  transition: background 0.15s;
+  font-weight: bold;
+  /* Match .nav-link context styling */
+  /* Optional: add border-radius and margin if desired for perfect match */
+}
+.nav-link,
+.nav-text {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 3px;
+  margin: 0 0 0 0.5rem;
+  max-width: 100%;
+  transition: background 0.15s;
+  font-weight: normal;
+}
+
+/* Bold for context title */
+.context .nav-link {
+  font-weight: bold;
+}
+
+
+
+/* Bold for nav-text (section headers) */
+.nav-text {
+  font-weight: bold;
+}
+.context {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  min-height: unset;
+  clear: both;
+}
+/* Context title alignment and spacing */
+
+.context {
+  display: block;
+  margin-bottom: 1rem;
+}
 .nav-container {
   position: fixed;
   top: var(--navbar-height);
@@ -83,14 +135,6 @@
   visibility: visible;
 }
 
-.nav {
-  background: var(--nav-background);
-  position: relative;
-  top: var(--toolbar-height);
-  height: var(--nav-height);
-  border: 0 none;
-}
-
 .nav .panels {
   display: flex;
   flex-direction: column;
@@ -153,6 +197,13 @@ html.is-clipped--nav {
   margin: 0 0 0 0.5rem;
 }
 
+/* Keep wrapper parents for profile components, but align their root rows with ISA peers. */
+.nav-trees[data-component="rva20-rvi20-rva22"] .nav-version-group > .nav-list > .nav-item > .nav-list,
+.nav-trees[data-component="rva23"] .nav-version-group > .nav-list > .nav-item > .nav-list,
+.nav-trees[data-component="rvb23"] .nav-version-group > .nav-list > .nav-item > .nav-list {
+  margin-left: 0;
+}
+
 .nav-list a.link-external::after {
   content: url(../img/link-external.svg);
   width: 14px;
@@ -187,7 +238,7 @@ html.is-clipped--nav {
   margin: 0;
 }
 
-.nav-item:not(.is-active) > .nav-list {
+.nav-item:not(.is-active) > .nav-item-toggle ~ .nav-list {
   display: none;
 }
 
@@ -254,15 +305,7 @@ html.dark-theme .riscvlogo--dark {
   transform: rotate(0deg);
 }
 
-.nav-link,
-.nav-text {
-  display: inline-block;
-  padding: 0.4rem 0.5rem;
-  border-radius: 3px;
-  padding-left: 12px;
-  margin-left: 10px;
-  max-width: 100%;
-}
+/* Removed duplicate .nav-link, .nav-text block for clarity */
 
 .nav-item-toggle + .nav-link,
 .nav-item-toggle + .nav-text {
@@ -272,7 +315,7 @@ html.dark-theme .riscvlogo--dark {
 
 .nav-item-toggle:hover + .nav-link,
 .nav-item-toggle:hover + .nav-text {
-  background: #ebf2f2;
+  background: rgba(0, 50, 98, 0.06);
 }
 
 .nav-item.is-current-page > .nav-item-toggle:hover + .nav-link {
@@ -280,13 +323,17 @@ html.dark-theme .riscvlogo--dark {
 }
 
 .nav-link:hover {
-  color: #06c;
+  color: var(--link_hover-font-color);
 }
 
 .nav-link:hover,
 .nav-text:hover {
   text-decoration: none;
-  background: #ebf2f2;
+  background: rgba(0, 50, 98, 0.06);
+}
+.nav-link:hover,
+.nav-text:hover {
+  background: rgba(0, 50, 98, 0.06) !important;
 }
 
 .dark-theme .nav-item-toggle:hover + .nav-link,
@@ -311,27 +358,16 @@ html.dark-theme .riscvlogo--dark {
 }
 
 .nav-panel-menu .context {
-  padding: 0.8rem 1rem;
-  padding-bottom: 0.8rem;
+  background: var(--nav-background, #fff);
   margin-bottom: 0.5rem;
   position: sticky;
   top: 0;
-  background-color: var(--body-background-color);
   z-index: 99;
   border-bottom: 4px solid #fdb515;
+  box-shadow: 0 2px 8px -4px rgba(0,0,0,0.08);
 }
 
-.nav-panel-menu .context .title {
-  font-weight: bold;
-  display: block;
-  height: 24px;
-  line-height: 24px;
-  padding-right: 30px;
-  margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* Removed duplicate .nav-panel-menu .context .title block for clarity */
 
 .nav-menu > .version-box ~ .nav-list > .nav-item:first-child > .nav-link,
 .nav-menu > .version-box ~ .nav-list > .nav-item:first-child > .nav-text,

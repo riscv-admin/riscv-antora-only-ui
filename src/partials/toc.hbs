@@ -1,15 +1,22 @@
 <aside class="sidebar">
   <div class="content">
-    <div class="tag-toggle-container">
-      <button
-        class="tag-toggle-btn"
-        type="button"
-        onclick="document.documentElement.classList.toggle('tag-highlight-enabled');"
-      >
-        <div class="tag-toggle-switch"></div>
-        <span id="tag-toggle-label">Normative Rules</span>
-      </button>
-    </div>
+    {{#if (or
+      (eq page.attributes.has_normative_rules true)
+      (eq page.attributes.has_normative_rules "true")
+      (eq (lookup page.componentVersion.asciidoc.attributes "page-has_normative_rules") true)
+      (eq (lookup page.componentVersion.asciidoc.attributes "page-has_normative_rules") "true")
+    )}}
+      <div class="tag-toggle-container">
+        <button
+          class="tag-toggle-btn"
+          type="button"
+          onclick="document.documentElement.classList.toggle('tag-highlight-enabled');"
+        >
+          <div class="tag-toggle-switch"></div>
+          <span id="tag-toggle-label">Normative Rules</span>
+        </button>
+      </div>
+    {{/if}}
     <div
       class="toc"
       data-title="{{{detag page.title}}}"
@@ -68,14 +75,14 @@
 
       {{#if (eq page.module "unpriv")}}
         {{#if page.attributes.pdf_url_unpriv}}
-          <a href="{{page.attributes.pdf_url_unpriv}}" target="_blank" rel="noopener noreferrer" class="sidebar-link" download>
+            <a href="{{page.attributes.pdf_url_unpriv}}" class="sidebar-link" download>
             <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             <span>Download PDF</span>
           </a>
         {{/if}}
       {{else if (eq page.module "priv")}}
         {{#if page.attributes.pdf_url_priv}}
-          <a href="{{page.attributes.pdf_url_priv}}" target="_blank" rel="noopener noreferrer" class="sidebar-link" download>
+            <a href="{{page.attributes.pdf_url_priv}}" class="sidebar-link" download>
             <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             <span>Download PDF</span>
           </a>
@@ -93,7 +100,7 @@
           </a>
           <ul id="pdfDropdownMenu" class="dropdown-menu" hidden>
             {{#each page.attributes.pdf_list}}
-              <li style="padding-left: 0px;"><a href="{{url}}" class="dropdown-item" target="_blank" rel="noopener noreferrer" style="color: #003262;" download>{{text}}</a></li>
+              <li style="padding-left: 0px;"><a href="{{url}}" class="dropdown-item" style="color: #003262;" download>{{text}}</a></li>
             {{/each}}
           </ul>
         </div>
@@ -134,7 +141,7 @@
 </script>
       {{else}}
         {{#if page.attributes.pdf_url}}
-          <a href="{{page.attributes.pdf_url}}" target="_blank" rel="noopener noreferrer" title="PDF" class="sidebar-link" download>
+          <a href="{{page.attributes.pdf_url}}" title="PDF" class="sidebar-link" download>
             <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
             <span>Download PDF</span>
           </a>

@@ -5,6 +5,15 @@
         <img class="riscvlogo riscvlogo--light" src="{{{uiRootPath}}}/img/risc-v_logo.svg" alt="RISCV" />
         <img class="riscvlogo riscvlogo--dark" src="{{{uiRootPath}}}/img/risc-v_logo_white.svg" alt="RISCV" />
       </a>
+      <div class="navbar-item home">
+        <a class="navbar-link"
+          href="{{siteRootPath}}/home/index.html"
+          aria-label="home"
+          title="home">
+          <img class="home-icon riscvlogo--light" src="{{{uiRootPath}}}/img/riscv-library.svg" alt="Home" />
+          <img class="home-icon riscvlogo--dark" src="{{{uiRootPath}}}/img/riscv-library_white.svg" alt="Home" />
+        </a>
+      </div>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -13,14 +22,8 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        <div class="navbar-item home">
-          <a class="navbar-link"
-            href="https://riscv.atlassian.net/wiki/spaces/HOME/pages/16154769/RISC-V+Technical+Specifications"
-            aria-label="Library">
-            Library</a>
-        </div>
       </div>
-      <div class="navbar-item has-dropdown is-hoverable">
+      {{!-- <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="#">ISA</a>
         <div class="navbar-dropdown">
           <a class="navbar-item" target="_blank" rel="noopener noreferrer"
@@ -61,7 +64,7 @@
         </div>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Non-ISA Hardware</a>
+        <a class="navbar-link" href="#">Hardware</a>
         <div class="navbar-dropdown" style="min-width: 280px">
           <a class="navbar-item" target="_blank" rel="noopener noreferrer"
             href="https://riscv.atlassian.net/wiki/external/MTc1MTUwOTg5NTRkNDk0YjlkOGY1MDk5MTljZGU2MjA">Advanced
@@ -96,7 +99,7 @@
           <a class="navbar-item" target="_blank" rel="noopener noreferrer"
             href="https://riscv.atlassian.net/wiki/external/NjI1Y2M5ODdiYmUxNGE5MzkzYzdkNzNjNGE3NWFjNDA">Efficient
             Trace
-            < <svg class="nav-external-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <svg class="nav-external-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
               <path d="M10 1h5v5h-2V3.41l-6.29 6.3-1.42-1.42L11.59 2H10V1zM14 14H2V2h5V0H2a2 2 0 0 0-2 2v12
              a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5h-2v5z" />
               </svg>
@@ -195,7 +198,7 @@
         </div>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">App Enablement</a>
+        <a class="navbar-link" href="#">Application Enablement</a>
         <div class="navbar-dropdown" style="min-width: 280px">
           <a class="navbar-item" target="_blank" rel="noopener noreferrer"
             href="https://riscv.atlassian.net/wiki/external/NWMwYmRhMDBkZGI5NDdiNjllZDRkODI2YTRhZDE4ZDc">Application Binary Interface
@@ -209,7 +212,7 @@
               <path d="M10 1h5v5h-2V3.41l-6.29 6.3-1.42-1.42L11.59 2H10V1zM14 14H2V2h5V0H2a2 2 0 0 0-2 2v12
              a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5h-2v5z" />
             </svg></a>
-        </div>
+        </div> --}}
       </div>
       {{#if env.SITE_SEARCH_PROVIDER}}
       <div class="navbar-item search hide-for-print search-position" style="padding-left: 0;">
